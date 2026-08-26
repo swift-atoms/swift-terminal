@@ -1,4 +1,4 @@
-import Terminal_Primitives
+import Terminal
 import Testing
 
 extension Terminal.Mode.Paste {

@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-terminal-primitives",
+    name: "swift-terminal",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -18,21 +18,21 @@ let package = Package(
             targets: ["Terminal Primitive"]
         ),
         .library(
-            name: "Terminal Error Primitives",
-            targets: ["Terminal Error Primitives"]
+            name: "Terminal Error",
+            targets: ["Terminal Error"]
         ),
         .library(
-            name: "Terminal Primitives",
-            targets: ["Terminal Primitives"]
+            name: "Terminal",
+            targets: ["Terminal"]
         ),
         .library(
-            name: "Terminal Primitives Test Support",
-            targets: ["Terminal Primitives Test Support"]
+            name: "Terminal Test Support",
+            targets: ["Terminal Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-error-primitives.git",
+            url: "https://github.com/swift-molecules/swift-error.git",
             branch: "main"
         )
     ],
@@ -44,32 +44,32 @@ let package = Package(
         ),
 
         .target(
-            name: "Terminal Error Primitives",
+            name: "Terminal Error",
             dependencies: [
                 "Terminal Primitive",
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
+                .product(name: "Error", package: "swift-error"),
             ]
         ),
 
         .target(
-            name: "Terminal Primitives",
+            name: "Terminal",
             dependencies: [
                 "Terminal Primitive",
-                "Terminal Error Primitives",
+                "Terminal Error",
             ]
         ),
         .testTarget(
-            name: "Terminal Primitives Tests",
+            name: "Terminal Tests",
             dependencies: [
                 "Terminal Primitive",
-                "Terminal Primitives",
+                "Terminal",
             ]
         ),
 
         .target(
-            name: "Terminal Primitives Test Support",
+            name: "Terminal Test Support",
             dependencies: [
-                "Terminal Primitives"
+                "Terminal"
             ],
             path: "Tests/Support"
         ),

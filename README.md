@@ -1,4 +1,4 @@
-# Terminal Primitives
+# Terminal
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -37,7 +37,7 @@ Alongside the sequences, `Terminal` is a typed vocabulary for the rest of the te
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-terminal-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-terminal.git", branch: "main")
 ]
 ```
 
@@ -45,7 +45,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Terminal Primitives", package: "swift-terminal-primitives"),
+        .product(name: "Terminal", package: "swift-terminal"),
     ]
 )
 ```
@@ -61,9 +61,9 @@ Three library products plus a test-support target. Depends only on the `Error` p
 | Product | Target | Purpose |
 |---------|--------|---------|
 | `Terminal Primitive` | `Sources/Terminal Primitive/` | The `Terminal` namespace: `Stream` (stdin/stdout/stderr) with `.read` / `.write` / `.mode` / `.interactive` accessors; `Size` (rows × columns); and the `Mode` escape-sequence constants — `Screen`, `Paste`, `Keyboard`, and `Mouse` (`Normal` / `Button` / `Any` / `SGR`). |
-| `Terminal Error Primitives` | `Sources/Terminal Error Primitives/` | `Terminal.Error` — an `Operation` (which call failed) paired with an `Underlying` cause (`kernel` / `platform` / `unsupported`), wrapping the `Error` primitive. |
-| `Terminal Primitives` | `Sources/Terminal Primitives/` | Umbrella that re-exports both targets. Import this for the full surface. |
-| `Terminal Primitives Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
+| `Terminal Error` | `Sources/Terminal Error/` | `Terminal.Error` — an `Operation` (which call failed) paired with an `Underlying` cause (`kernel` / `platform` / `unsupported`), wrapping the `Error` primitive. |
+| `Terminal` | `Sources/Terminal/` | Umbrella that re-exports both targets. Import this for the full surface. |
+| `Terminal Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
 
 Foundation-free.
 

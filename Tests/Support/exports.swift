@@ -1,1 +1,1 @@
-@_exported public import Terminal_Primitives
+@_exported public import Terminal
