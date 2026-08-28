@@ -1,4 +1,4 @@
-public import Terminal_Primitive
+public import Terminal
 
 extension Terminal.Error {
 

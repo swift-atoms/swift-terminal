@@ -1,4 +1,4 @@
-# Terminal Primitives
+# Terminal
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -11,7 +11,7 @@ Typed terminal-control vocabulary for Swift — standard streams, window size, m
 The `Terminal.Mode` sequences are ready-to-write `String` constants — named, typed DEC/ANSI escapes instead of hand-written `"\u{1B}[?1049h"` magic strings scattered through your render loop:
 
 ```swift
-import Terminal_Primitive
+import Terminal
 
 // Drive a full-screen, mouse-aware session, restoring every mode on exit.
 func withFullScreenMouseSession(_ body: () -> Void) {
@@ -37,7 +37,7 @@ Alongside the sequences, `Terminal` is a typed vocabulary for the rest of the te
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-terminal-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-terminal.git", branch: "main")
 ]
 ```
 
@@ -45,7 +45,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Terminal Primitives", package: "swift-terminal-primitives"),
+        .product(name: "Terminal", package: "swift-terminal"),
     ]
 )
 ```
@@ -56,14 +56,12 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-Three library products plus a test-support target. Depends only on the `Error` primitive.
+Two library products. Depends only on the canonical `Error` package.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Terminal Primitive` | `Sources/Terminal Primitive/` | The `Terminal` namespace: `Stream` (stdin/stdout/stderr) with `.read` / `.write` / `.mode` / `.interactive` accessors; `Size` (rows × columns); and the `Mode` escape-sequence constants — `Screen`, `Paste`, `Keyboard`, and `Mouse` (`Normal` / `Button` / `Any` / `SGR`). |
-| `Terminal Error Primitives` | `Sources/Terminal Error Primitives/` | `Terminal.Error` — an `Operation` (which call failed) paired with an `Underlying` cause (`kernel` / `platform` / `unsupported`), wrapping the `Error` primitive. |
-| `Terminal Primitives` | `Sources/Terminal Primitives/` | Umbrella that re-exports both targets. Import this for the full surface. |
-| `Terminal Primitives Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
+| `Terminal` | `Sources/Terminal/` | The `Terminal` namespace: `Stream` (stdin/stdout/stderr) with `.read` / `.write` / `.mode` / `.interactive` accessors; `Size` (rows × columns); and the `Mode` escape-sequence constants — `Screen`, `Paste`, `Keyboard`, and `Mouse` (`Normal` / `Button` / `Any` / `SGR`). |
+| `Terminal Error` | `Sources/Terminal Error/` | `Terminal.Error` — an `Operation` (which call failed) paired with an `Underlying` cause (`kernel` / `platform` / `unsupported`), wrapping the canonical `Error` carrier. |
 
 Foundation-free.
 

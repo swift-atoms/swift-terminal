@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-terminal-primitives",
+    name: "swift-terminal",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -14,64 +14,45 @@ let package = Package(
     products: [
 
         .library(
-            name: "Terminal Primitive",
-            targets: ["Terminal Primitive"]
+            name: "Terminal",
+            targets: ["Terminal"]
         ),
         .library(
-            name: "Terminal Error Primitives",
-            targets: ["Terminal Error Primitives"]
-        ),
-        .library(
-            name: "Terminal Primitives",
-            targets: ["Terminal Primitives"]
-        ),
-        .library(
-            name: "Terminal Primitives Test Support",
-            targets: ["Terminal Primitives Test Support"]
+            name: "Terminal Error",
+            targets: ["Terminal Error"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-error-primitives.git",
+            url: "https://github.com/swift-atoms/swift-error.git",
             branch: "main"
         )
     ],
     targets: [
 
         .target(
-            name: "Terminal Primitive",
+            name: "Terminal",
             dependencies: []
         ),
 
         .target(
-            name: "Terminal Error Primitives",
+            name: "Terminal Error",
             dependencies: [
-                "Terminal Primitive",
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Terminal Primitives",
-            dependencies: [
-                "Terminal Primitive",
-                "Terminal Error Primitives",
+                .target(name: "Terminal"),
+                .product(name: "Error", package: "swift-error"),
             ]
         ),
         .testTarget(
-            name: "Terminal Primitives Tests",
+            name: "Terminal Tests",
             dependencies: [
-                "Terminal Primitive",
-                "Terminal Primitives",
+                .target(name: "Terminal"),
             ]
         ),
-
-        .target(
-            name: "Terminal Primitives Test Support",
+        .testTarget(
+            name: "Terminal Error Tests",
             dependencies: [
-                "Terminal Primitives"
-            ],
-            path: "Tests/Support"
+                .target(name: "Terminal Error"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]
