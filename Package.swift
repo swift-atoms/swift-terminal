@@ -14,64 +14,45 @@ let package = Package(
     products: [
 
         .library(
-            name: "Terminal Primitive",
-            targets: ["Terminal Primitive"]
+            name: "Terminal",
+            targets: ["Terminal"]
         ),
         .library(
             name: "Terminal Error",
             targets: ["Terminal Error"]
         ),
-        .library(
-            name: "Terminal",
-            targets: ["Terminal"]
-        ),
-        .library(
-            name: "Terminal Test Support",
-            targets: ["Terminal Test Support"]
-        ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-error.git",
+            url: "https://github.com/swift-atoms/swift-error.git",
             branch: "main"
         )
     ],
     targets: [
 
         .target(
-            name: "Terminal Primitive",
+            name: "Terminal",
             dependencies: []
         ),
 
         .target(
             name: "Terminal Error",
             dependencies: [
-                "Terminal Primitive",
+                .target(name: "Terminal"),
                 .product(name: "Error", package: "swift-error"),
-            ]
-        ),
-
-        .target(
-            name: "Terminal",
-            dependencies: [
-                "Terminal Primitive",
-                "Terminal Error",
             ]
         ),
         .testTarget(
             name: "Terminal Tests",
             dependencies: [
-                "Terminal Primitive",
-                "Terminal",
+                .target(name: "Terminal"),
             ]
         ),
-
-        .target(
-            name: "Terminal Test Support",
+        .testTarget(
+            name: "Terminal Error Tests",
             dependencies: [
-                "Terminal"
-            ],
-            path: "Tests/Support"
+                .target(name: "Terminal Error"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]
