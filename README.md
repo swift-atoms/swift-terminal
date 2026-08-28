@@ -29,7 +29,7 @@ func withFullScreenMouseSession(_ body: () -> Void) {
 
 Each escape sequence is paired (`enable` / `disable`) so cleanup is symmetric and a missing reset becomes a visible omission rather than a stray byte string. `Screen`, `Paste`, `Keyboard`, and the four `Mouse` tracking modes (`Normal`, `Button`, `Any`, `SGR`) cover the common interactive-terminal toggles.
 
-Alongside the sequences, `Terminal` is a typed vocabulary for the rest of the terminal surface: `Terminal.Stream` (`stdin` / `stdout` / `stderr`, each carrying its file descriptor) exposes `.read`, `.write`, `.mode`, and `.interactive` accessors; `Terminal.Size` is a `rows × columns` value. The *runtime* operations behind those accessors — querying the window size, entering raw mode, testing interactivity — are added by downstream platform packages (`swift-iso-9945` for POSIX, `swift-windows-primitives` for Windows). This package holds the platform-independent types and sequences they operate on, so the same vocabulary travels unchanged across platforms.
+Alongside the sequences, `Terminal` is a typed vocabulary for the rest of the terminal surface: `Terminal.Stream` (`stdin` / `stdout` / `stderr`, each carrying its file descriptor) exposes `.read`, `.write`, `.mode`, and `.interactive` accessors; `Terminal.Size` is a `rows × columns` value. The *runtime* operations behind those accessors — querying the window size, entering raw mode, testing interactivity — are added by downstream platform packages (`swift-iso-9945` for POSIX, `swift-windows` for Windows). This package holds the platform-independent types and sequences they operate on, so the same vocabulary travels unchanged across platforms.
 
 ---
 
