@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Terminal
+@testable import Terminal_Primitive
 
 @Suite struct `Terminal.Stream Tests` {
     @Suite struct Unit {}

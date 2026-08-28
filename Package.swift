@@ -12,40 +12,66 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
+
+        .library(
+            name: "Terminal Primitive",
+            targets: ["Terminal Primitive"]
+        ),
+        .library(
+            name: "Terminal Error",
+            targets: ["Terminal Error"]
+        ),
         .library(
             name: "Terminal",
             targets: ["Terminal"]
         ),
         .library(
-            name: "Terminal Standard Library Integration",
-            targets: ["Terminal Standard Library Integration"]
-        ),
-        .library(
-            name: "Terminal Apple Foundation Integration",
-            targets: ["Terminal Apple Foundation Integration"]
+            name: "Terminal Test Support",
+            targets: ["Terminal Test Support"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/swift-molecules/swift-error.git",
+            branch: "main"
+        )
+    ],
     targets: [
+
         .target(
-            name: "Terminal",
+            name: "Terminal Primitive",
             dependencies: []
         ),
+
         .target(
-            name: "Terminal Standard Library Integration",
-            dependencies: ["Terminal"]
-        ),
-        .target(
-            name: "Terminal Apple Foundation Integration",
+            name: "Terminal Error",
             dependencies: [
-                "Terminal",
-                "Terminal Standard Library Integration",
+                "Terminal Primitive",
+                .product(name: "Error", package: "swift-error"),
+            ]
+        ),
+
+        .target(
+            name: "Terminal",
+            dependencies: [
+                "Terminal Primitive",
+                "Terminal Error",
             ]
         ),
         .testTarget(
             name: "Terminal Tests",
-            dependencies: ["Terminal"],
-            path: "Tests/Terminal Tests"
+            dependencies: [
+                "Terminal Primitive",
+                "Terminal",
+            ]
+        ),
+
+        .target(
+            name: "Terminal Test Support",
+            dependencies: [
+                "Terminal"
+            ],
+            path: "Tests/Support"
         ),
     ],
     swiftLanguageModes: [.v6]
