@@ -51,6 +51,7 @@ let package = Package(
         .testTarget(
             name: "Terminal Error Tests",
             dependencies: [
+                .target(name: "Terminal"),
                 .target(name: "Terminal Error"),
             ]
         ),
