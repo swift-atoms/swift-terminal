@@ -1,4 +1,3 @@
-public import Terminal
 
 extension Terminal.Error {
 

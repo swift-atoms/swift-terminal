@@ -12,15 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Terminal",
-            targets: ["Terminal"]
-        ),
-        .library(
-            name: "Terminal Error",
-            targets: ["Terminal Error"]
-        ),
+        .library(name: "Terminal", targets: ["Terminal"]),
+        .library(name: "Terminal Standard Library Integration", targets: ["Terminal Standard Library Integration"]),
+        .library(name: "Terminal Foundation Library Integration", targets: ["Terminal Foundation Library Integration"]),
+        .library(name: "Terminal Test Support", targets: ["Terminal Test Support"]),
     ],
     dependencies: [
         .package(
@@ -29,38 +24,51 @@ let package = Package(
         )
     ],
     targets: [
-
         .target(
             name: "Terminal",
-            dependencies: []
+            dependencies: [
+                .product(name: "Error", package: "swift-error"),
+            ],
+            path: "Sources/Terminal"
         ),
-
         .target(
-            name: "Terminal Error",
+            name: "Terminal Standard Library Integration",
             dependencies: [
                 .target(name: "Terminal"),
-                .product(name: "Error", package: "swift-error"),
-            ]
+            ],
+            path: "Sources/Terminal Standard Library Integration"
+        ),
+        .target(
+            name: "Terminal Foundation Library Integration",
+            dependencies: [
+                .target(name: "Terminal"),
+                .target(name: "Terminal Standard Library Integration"),
+            ],
+            path: "Sources/Terminal Foundation Library Integration"
+        ),
+        .target(
+            name: "Terminal Test Support",
+            dependencies: [
+                .target(name: "Terminal"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Terminal Tests",
             dependencies: [
                 .target(name: "Terminal"),
-            ]
-        ),
-        .testTarget(
-            name: "Terminal Error Tests",
-            dependencies: [
-                .target(name: "Terminal"),
-                .target(name: "Terminal Error"),
-            ]
+                .target(name: "Terminal Test Support"),
+                .target(name: "Terminal Standard Library Integration"),
+                .target(name: "Terminal Foundation Library Integration"),
+            ],
+            path: "Tests/Terminal Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -69,8 +77,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

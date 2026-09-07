@@ -1,5 +1,4 @@
 import Terminal
-import Terminal_Error
 import Testing
 
 @Suite
