@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Terminal", targets: ["Terminal"]),
-        .library(name: "Terminal Standard Library Integration", targets: ["Terminal Standard Library Integration"]),
-        .library(name: "Terminal Foundation Library Integration", targets: ["Terminal Foundation Library Integration"]),
+
+        .library(name: "Terminal Foundation Integration", targets: ["Terminal Foundation Integration"]),
         .library(name: "Terminal Test Support", targets: ["Terminal Test Support"]),
     ],
     dependencies: [
@@ -31,20 +31,13 @@ let package = Package(
             ],
             path: "Sources/Terminal"
         ),
+        
         .target(
-            name: "Terminal Standard Library Integration",
+            name: "Terminal Foundation Integration",
             dependencies: [
                 .target(name: "Terminal"),
             ],
-            path: "Sources/Terminal Standard Library Integration"
-        ),
-        .target(
-            name: "Terminal Foundation Library Integration",
-            dependencies: [
-                .target(name: "Terminal"),
-                .target(name: "Terminal Standard Library Integration"),
-            ],
-            path: "Sources/Terminal Foundation Library Integration"
+            path: "Sources/Terminal Foundation Integration"
         ),
         .target(
             name: "Terminal Test Support",
@@ -58,8 +51,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Terminal"),
                 .target(name: "Terminal Test Support"),
-                .target(name: "Terminal Standard Library Integration"),
-                .target(name: "Terminal Foundation Library Integration"),
+                .target(name: "Terminal Foundation Integration"),
             ],
             path: "Tests/Terminal Tests"
         ),

@@ -1,4 +1,3 @@
-
 extension Terminal.Error {
 
     public enum Operation: Sendable, Hashable {
