@@ -3,13 +3,13 @@ import Testing
 
 extension Terminal.Stream.Read {
     @Suite
-    struct Test {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
+    struct `Read accessors preserve their terminal stream identities` {
+        @Suite struct `Read construction and stream accessors retain the selected stream` {}
+        @Suite struct `Different streams produce distinct read accessors` {}
     }
 }
 
-extension Terminal.Stream.Read.Test.Unit {
+extension Terminal.Stream.Read.`Read accessors preserve their terminal stream identities`.`Read construction and stream accessors retain the selected stream` {
     @Test
     func `Init stores stream`() {
         let read = Terminal.Stream.Read(stream: .stdin)
@@ -35,7 +35,7 @@ extension Terminal.Stream.Read.Test.Unit {
     }
 }
 
-extension Terminal.Stream.Read.Test.`Edge Case` {
+extension Terminal.Stream.Read.`Read accessors preserve their terminal stream identities`.`Different streams produce distinct read accessors` {
     @Test
     func `Each stream produces distinct Read accessor`() {
         let stdinRead = Terminal.Stream.stdin.read

@@ -3,13 +3,13 @@ import Testing
 
 extension Terminal.Mode.Mouse {
     @Suite
-    struct Test {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
+    struct `Mouse mode sequences encode distinct DEC private modes` {
+        @Suite struct `Mouse mode enable and disable sequences retain their assigned mode numbers` {}
+        @Suite struct `Mouse modes preserve distinct numbers and common control sequence structure` {}
     }
 }
 
-extension Terminal.Mode.Mouse.Test.Unit {
+extension Terminal.Mode.Mouse.`Mouse mode sequences encode distinct DEC private modes`.`Mouse mode enable and disable sequences retain their assigned mode numbers` {
     @Test
     func `Normal enable is DEC private mode 1000h`() {
         #expect(Terminal.Mode.Mouse.Normal.enable == "\u{1B}[?1000h")
@@ -51,7 +51,7 @@ extension Terminal.Mode.Mouse.Test.Unit {
     }
 }
 
-extension Terminal.Mode.Mouse.Test.`Edge Case` {
+extension Terminal.Mode.Mouse.`Mouse mode sequences encode distinct DEC private modes`.`Mouse modes preserve distinct numbers and common control sequence structure` {
     @Test
     func `Enable sequences end with h`() {
         #expect(Terminal.Mode.Mouse.Normal.enable.hasSuffix("h"))

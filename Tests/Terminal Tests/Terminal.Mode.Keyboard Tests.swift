@@ -3,13 +3,13 @@ import Testing
 
 extension Terminal.Mode.Keyboard {
     @Suite
-    struct Test {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
+    struct `Keyboard mode sequences encode Kitty enable and disable operations` {
+        @Suite struct `Keyboard mode enable pushes flags one and disable pops the mode` {}
+        @Suite struct `Keyboard mode sequences retain distinct CSI forms and the u suffix` {}
     }
 }
 
-extension Terminal.Mode.Keyboard.Test.Unit {
+extension Terminal.Mode.Keyboard.`Keyboard mode sequences encode Kitty enable and disable operations`.`Keyboard mode enable pushes flags one and disable pops the mode` {
     @Test
     func `Enable pushes Kitty keyboard mode with flags 1`() {
         #expect(Terminal.Mode.Keyboard.enable == "\u{1B}[>1u")
@@ -21,7 +21,7 @@ extension Terminal.Mode.Keyboard.Test.Unit {
     }
 }
 
-extension Terminal.Mode.Keyboard.Test.`Edge Case` {
+extension Terminal.Mode.Keyboard.`Keyboard mode sequences encode Kitty enable and disable operations`.`Keyboard mode sequences retain distinct CSI forms and the u suffix` {
     @Test
     func `Sequences use CSI prefix without private mode marker`() {
 

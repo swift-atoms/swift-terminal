@@ -2,7 +2,7 @@ import Terminal
 import Testing
 
 @Suite
-struct `Terminal Error Tests` {
+struct `Unsupported terminal errors identify their operations` {
     @Test
     func `unsupported errors identify their operation`() {
         let error = Terminal.Error(operation: .querySize, underlying: .unsupported)
