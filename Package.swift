@@ -17,18 +17,11 @@ let package = Package(
         .library(name: "Terminal Foundation Integration", targets: ["Terminal Foundation Integration"]),
         .library(name: "Terminal Test Support", targets: ["Terminal Test Support"]),
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/swift-atoms/swift-error.git",
-            branch: "main"
-        )
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "Terminal",
-            dependencies: [
-                .product(name: "Error", package: "swift-error"),
-            ],
+            dependencies: [],
             path: "Sources/Terminal"
         ),
         
