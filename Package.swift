@@ -17,14 +17,46 @@ let package = Package(
         .library(name: "Terminal Foundation Integration", targets: ["Terminal Foundation Integration"]),
         .library(name: "Terminal Test Support", targets: ["Terminal Test Support"]),
     ],
-    dependencies: [],
+    traits: [
+        .trait(name: "Input", description: "Absorbed swift-terminal-input APIs"),
+        .trait(name: "Error", description: "Absorbed swift-terminal-error APIs"),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-cursor.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-error.git", branch: "main"),
+    ],
     targets: [
+        .testTarget(
+            name: "Absorbed swift-terminal-input Tests",
+            dependencies: [
+                .target(name: "Terminal"),
+                .product(name: "ASCII", package: "swift-ascii", condition: .when(traits: ["Input"])),
+                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Input"])),
+                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Input"])),
+            ],
+            path: "Tests/Absorbed swift-terminal-input"
+        ),
+        .testTarget(
+            name: "Absorbed swift-terminal-error Tests",
+            dependencies: [
+                .target(name: "Terminal"),
+                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Error"])),
+            ],
+            path: "Tests/Absorbed swift-terminal-error"
+        ),
         .target(
             name: "Terminal",
-            dependencies: [],
+            dependencies: [
+                .product(name: "ASCII", package: "swift-ascii", condition: .when(traits: ["Input"])),
+                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Input"])),
+                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Input"])),
+                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Error"])),
+            ],
             path: "Sources/Terminal"
         ),
-        
+
         .target(
             name: "Terminal Foundation Integration",
             dependencies: [
