@@ -25,7 +25,7 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-cursor.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
-        .package(url: "https://github.com/swift-molecules/swift-error.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-error.git", branch: "main"),
     ],
     targets: [
         .testTarget(
