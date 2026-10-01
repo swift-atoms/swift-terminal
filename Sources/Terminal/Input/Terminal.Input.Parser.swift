@@ -1,7 +1,7 @@
 #if Input
-public import ASCII
+import ASCII
 public import Byte
-public import Cursor
+import Cursor
 
 extension Terminal.Input {
 
