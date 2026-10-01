@@ -32,9 +32,9 @@ let package = Package(
             name: "Absorbed swift-terminal-input Tests",
             dependencies: [
                 .target(name: "Terminal"),
-                .product(name: "ASCII", package: "swift-ascii", condition: .when(traits: ["Input"])),
-                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Input"])),
-                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Input"])),
+                .product(name: "ASCII", package: "swift-ascii"),
+                .product(name: "Byte", package: "swift-byte"),
+                .product(name: "Cursor", package: "swift-cursor"),
             ],
             path: "Tests/Absorbed swift-terminal-input"
         ),
@@ -42,17 +42,17 @@ let package = Package(
             name: "Absorbed swift-terminal-error Tests",
             dependencies: [
                 .target(name: "Terminal"),
-                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Error"])),
+                .product(name: "Error", package: "swift-error"),
             ],
             path: "Tests/Absorbed swift-terminal-error"
         ),
         .target(
             name: "Terminal",
             dependencies: [
-                .product(name: "ASCII", package: "swift-ascii", condition: .when(traits: ["Input"])),
-                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Input"])),
-                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Input"])),
-                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Error"])),
+                .product(name: "ASCII", package: "swift-ascii"),
+                .product(name: "Byte", package: "swift-byte"),
+                .product(name: "Cursor", package: "swift-cursor"),
+                .product(name: "Error", package: "swift-error"),
             ],
             path: "Sources/Terminal"
         ),
