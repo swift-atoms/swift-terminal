@@ -9,7 +9,7 @@ extension Terminal.Input {
 
         case resize(Terminal.Size)
 
-        case paste(Swift.String)
+        case paste(Swift::String)
     }
 }
 #endif

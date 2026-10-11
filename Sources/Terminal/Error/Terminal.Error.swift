@@ -1,7 +1,7 @@
 #if Error
 extension Terminal {
 
-    public struct Error: Swift.Error, Sendable {
+    public struct Error: Swift::Error, Sendable {
 
         public let operation: Operation
 

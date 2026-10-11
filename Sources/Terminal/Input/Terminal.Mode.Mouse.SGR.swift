@@ -6,8 +6,8 @@ extension Terminal.Mode.Mouse {
 
 extension Terminal.Mode.Mouse.SGR {
 
-    public static let enable: Swift.String = "\u{1B}[?1006h"
+    public static let enable: Swift::String = "\u{1B}[?1006h"
 
-    public static let disable: Swift.String = "\u{1B}[?1006l"
+    public static let disable: Swift::String = "\u{1B}[?1006l"
 }
 #endif

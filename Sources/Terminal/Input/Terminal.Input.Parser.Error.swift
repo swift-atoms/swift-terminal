@@ -5,7 +5,7 @@ import Cursor
 
 extension Terminal.Input.Parser {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case emptyInput
 

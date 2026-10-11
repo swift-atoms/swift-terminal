@@ -27,11 +27,11 @@ extension Terminal.Input.Parser {
 
         let code = mapCodepointToKeyCode(codepoint)
 
-        let text: Swift.String?
+        let text: Swift::String?
         if let scalar = Unicode.Scalar(codepoint),
             codepoint >= 0x20 && codepoint != 0x7F && codepoint < 0xE000
         {
-            text = Swift.String(scalar)
+            text = Swift::String(scalar)
         } else {
             text = nil
         }

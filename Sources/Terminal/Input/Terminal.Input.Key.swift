@@ -7,14 +7,14 @@ extension Terminal.Input {
 
         public var modifiers: Modifiers
 
-        public var text: Swift.String?
+        public var text: Swift::String?
 
         public var kind: Kind?
 
         public init(
             code: Code,
             modifiers: Modifiers = [],
-            text: Swift.String? = nil,
+            text: Swift::String? = nil,
             kind: Kind? = nil
         ) {
             self.code = code

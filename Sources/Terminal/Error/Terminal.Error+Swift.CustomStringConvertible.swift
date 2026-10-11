@@ -1,7 +1,7 @@
 #if Error
-extension Terminal.Error: Swift.CustomStringConvertible {
+extension Terminal.Error: Swift::CustomStringConvertible {
 
-    public var description: Swift.String {
+    public var description: Swift::String {
         switch underlying {
         case .kernel(let error):
             return "Terminal.\(operation): \(error)"
