@@ -1,2 +1,2 @@
-@_exported public import Terminal
 import Foundation
+@_exported public import Terminal

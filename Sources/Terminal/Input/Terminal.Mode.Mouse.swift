@@ -1,6 +1,6 @@
 #if Input
-extension Terminal.Mode {
+    extension Terminal.Mode {
 
-    public enum Mouse {}
-}
+        public enum Mouse {}
+    }
 #endif

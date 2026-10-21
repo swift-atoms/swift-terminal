@@ -1,6 +1,6 @@
 #if Input
-extension Terminal {
+    extension Terminal {
 
-    public enum Input {}
-}
+        public enum Input {}
+    }
 #endif

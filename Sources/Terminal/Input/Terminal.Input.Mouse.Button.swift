@@ -1,17 +1,17 @@
 #if Input
-extension Terminal.Input.Mouse {
+    extension Terminal.Input.Mouse {
 
-    public enum Button: Sendable, Equatable {
+        public enum Button: Sendable, Equatable {
 
-        case left
+            case left
 
-        case middle
+            case middle
 
-        case right
+            case right
 
-        case backward
+            case backward
 
-        case forward
+            case forward
+        }
     }
-}
 #endif

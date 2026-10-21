@@ -1,141 +1,137 @@
 #if Input
-import ASCII
-public import Byte
-import Cursor
+    import ASCII
+    public import Byte
+    import Cursor
 
-extension Terminal.Input {
+    extension Terminal.Input {
 
-    public struct Parser: Sendable {
+        public struct Parser: Sendable {
 
-        public init() {}
+            public init() {}
+        }
     }
-}
 
-extension Terminal.Input.Parser {
+    extension Terminal.Input.Parser {
 
-    public static func parse(
-        _ input: inout ArraySlice<Byte>
-    ) throws(Self.Error) -> Terminal.Input.Event
-    {
-        guard let byte = input.first else {
-            throw .emptyInput
-        }
-
-        let code: ASCII.Code
-        do {
-            code = try ASCII.Code(byte)
-        } catch {
-
-            let saved = input
-            do {
-                return try parseUTF8(&input)
-            } catch let utf8Err {
-                if utf8Err == .incompleteSequence {
-                    input = saved
-                }
-                throw utf8Err
+        public static func parse(
+            _ input: inout ArraySlice<Byte>
+        ) throws(Self.Error) -> Terminal.Input.Event {
+            guard let byte = input.first else {
+                throw .emptyInput
             }
-        }
 
-        switch code {
-        case .esc:
-            let saved = input
+            let code: ASCII.Code
             do {
-                return try parseEscapeSequence(&input)
+                code = try ASCII.Code(byte)
             } catch {
-                if error == .incompleteSequence {
-                    input = saved
+
+                let saved = input
+                do {
+                    return try parseUTF8(&input)
+                } catch let utf8Err {
+                    if utf8Err == .incompleteSequence {
+                        input = saved
+                    }
+                    throw utf8Err
                 }
-                throw error
             }
 
-        case .del:
-            consumeUnchecked(&input)
-            return .key(Terminal.Input.Key(code: .backspace))
+            switch code {
+            case .esc:
+                let saved = input
+                do {
+                    return try parseEscapeSequence(&input)
+                } catch {
+                    if error == .incompleteSequence {
+                        input = saved
+                    }
+                    throw error
+                }
 
-        case .nul...ASCII.Code.us:
-            return parseControlCharacter(&input)
+            case .del:
+                consumeUnchecked(&input)
+                return .key(Terminal.Input.Key(code: .backspace))
 
-        case .space...ASCII.Code.tilde:
-            let b = consumeUnchecked(&input)
-            return .key(Terminal.Input.Key(code: .character(Unicode.Scalar(b.bitPattern))))
+            case .nul...ASCII.Code.us:
+                return parseControlCharacter(&input)
 
-        default:
+            case .space...ASCII.Code.tilde:
+                let b = consumeUnchecked(&input)
+                return .key(Terminal.Input.Key(code: .character(Unicode.Scalar(b.bitPattern))))
 
-            throw .unrecognizedSequence
+            default:
+
+                throw .unrecognizedSequence
+            }
         }
     }
-}
 
-extension Terminal.Input.Parser {
+    extension Terminal.Input.Parser {
 
-    static func parseEscapeSequence(
-        _ input: inout ArraySlice<Byte>
-    ) throws(Self.Error) -> Terminal.Input.Event
-    {
+        static func parseEscapeSequence(
+            _ input: inout ArraySlice<Byte>
+        ) throws(Self.Error) -> Terminal.Input.Event {
 
-        consumeUnchecked(&input)
-
-        guard let next = input.first else {
-            throw .incompleteSequence
-        }
-
-        let code: ASCII.Code
-        do {
-            code = try ASCII.Code(next)
-        } catch {
-            throw .unrecognizedSequence
-        }
-
-        switch code {
-        case .leftBracket:
             consumeUnchecked(&input)
-            return try parseCSI(&input)
 
-        case .O:
-            consumeUnchecked(&input)
-            return try parseSS3(&input)
+            guard let next = input.first else {
+                throw .incompleteSequence
+            }
 
-        case .space...ASCII.Code.tilde:
-            consumeUnchecked(&input)
-            return .key(
-                Terminal.Input.Key(
-                    code: .character(Unicode.Scalar(next.bitPattern)),
-                    modifiers: .alt
+            let code: ASCII.Code
+            do {
+                code = try ASCII.Code(next)
+            } catch {
+                throw .unrecognizedSequence
+            }
+
+            switch code {
+            case .leftBracket:
+                consumeUnchecked(&input)
+                return try parseCSI(&input)
+
+            case .O:
+                consumeUnchecked(&input)
+                return try parseSS3(&input)
+
+            case .space...ASCII.Code.tilde:
+                consumeUnchecked(&input)
+                return .key(
+                    Terminal.Input.Key(
+                        code: .character(Unicode.Scalar(next.bitPattern)),
+                        modifiers: .alt
+                    )
                 )
-            )
 
-        default:
-            throw .unrecognizedSequence
+            default:
+                throw .unrecognizedSequence
+            }
         }
     }
-}
 
-extension Terminal.Input.Parser {
+    extension Terminal.Input.Parser {
 
-    @inline(always)
-    static func consume(
-        _ input: inout ArraySlice<Byte>
-    ) throws(Self.Error) -> Byte
-    {
-        guard let byte = input.next() else {
-            throw .incompleteSequence
+        @inline(always)
+        static func consume(
+            _ input: inout ArraySlice<Byte>
+        ) throws(Self.Error) -> Byte {
+            guard let byte = input.next() else {
+                throw .incompleteSequence
+            }
+            return byte
         }
-        return byte
-    }
 
-    @inline(always)
-    @discardableResult
-    static func consumeUnchecked(
-        _ input: inout ArraySlice<Byte>
-    ) -> Byte
-    {
-        guard let byte = input.next() else {
-            preconditionFailure(
-                "consumeUnchecked requires a non-empty buffer; the caller violated the !input.isEmpty precondition"
-            )
+        @inline(always)
+        @discardableResult
+        static func consumeUnchecked(
+            _ input: inout ArraySlice<Byte>
+        ) -> Byte {
+            guard let byte = input.next() else {
+                preconditionFailure(
+                    "consumeUnchecked requires a non-empty buffer; the caller violated the !input.isEmpty precondition"
+                )
+            }
+            return byte
         }
-        return byte
     }
-}
 #endif

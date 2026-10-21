@@ -1,23 +1,23 @@
 #if Input
-extension Terminal.Input.Mouse {
+    extension Terminal.Input.Mouse {
 
-    public enum Kind: Sendable, Equatable {
+        public enum Kind: Sendable, Equatable {
 
-        case press(Button)
+            case press(Button)
 
-        case release(Button)
+            case release(Button)
 
-        case move
+            case move
 
-        case drag(Button)
+            case drag(Button)
 
-        case scrollUp
+            case scrollUp
 
-        case scrollDown
+            case scrollDown
 
-        case scrollLeft
+            case scrollLeft
 
-        case scrollRight
+            case scrollRight
+        }
     }
-}
 #endif

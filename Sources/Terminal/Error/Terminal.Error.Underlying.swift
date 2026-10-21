@@ -1,15 +1,15 @@
 #if Error
-public import Error
+    public import Error
 
-extension Terminal.Error {
+    extension Terminal.Error {
 
-    public enum Underlying: Sendable {
+        public enum Underlying: Sendable {
 
-        case kernel(Error::Error)
+            case kernel(Error::Error)
 
-        case platform(Error::Error)
+            case platform(Error::Error)
 
-        case unsupported
+            case unsupported
+        }
     }
-}
 #endif

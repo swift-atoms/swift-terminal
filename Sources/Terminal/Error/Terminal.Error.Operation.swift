@@ -1,15 +1,15 @@
 #if Error
-extension Terminal.Error {
+    extension Terminal.Error {
 
-    public enum Operation: Sendable, Hashable {
+        public enum Operation: Sendable, Hashable {
 
-        case querySize
+            case querySize
 
-        case enterRaw
+            case enterRaw
 
-        case exitRaw
+            case exitRaw
 
-        case enableVT
+            case enableVT
+        }
     }
-}
 #endif

@@ -1,13 +1,13 @@
 #if Input
-extension Terminal.Input.Key {
+    extension Terminal.Input.Key {
 
-    public enum Kind: Sendable, Equatable {
+        public enum Kind: Sendable, Equatable {
 
-        case press
+            case press
 
-        case `repeat`
+            case `repeat`
 
-        case release
+            case release
+        }
     }
-}
 #endif
