@@ -1,14 +1,16 @@
 import Terminal
 import Testing
 
-extension Terminal.Stream.Write {
+enum `Terminal.Stream.Write Tests` {}
+
+extension `Terminal.Stream.Write Tests` {
     @Suite
     struct `Write accessors preserve stream identities across isolation boundaries` {
         @Suite struct `Write accessors retain standard stream identities and support task transfer` {}
     }
 }
 
-extension Terminal.Stream.Write.`Write accessors preserve stream identities across isolation boundaries`.`Write accessors retain standard stream identities and support task transfer` {
+extension `Terminal.Stream.Write Tests`.`Write accessors preserve stream identities across isolation boundaries`.`Write accessors retain standard stream identities and support task transfer` {
     @Test
     func `write accessor preserves stream identity`() {
         let stream = Terminal.Stream.stdout

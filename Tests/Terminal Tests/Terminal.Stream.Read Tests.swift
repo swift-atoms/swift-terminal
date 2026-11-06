@@ -1,7 +1,9 @@
 import Terminal
 import Testing
 
-extension Terminal.Stream.Read {
+enum `Terminal.Stream.Read Tests` {}
+
+extension `Terminal.Stream.Read Tests` {
     @Suite
     struct `Read accessors preserve their terminal stream identities` {
         @Suite struct `Read construction and stream accessors retain the selected stream` {}
@@ -9,7 +11,7 @@ extension Terminal.Stream.Read {
     }
 }
 
-extension Terminal.Stream.Read.`Read accessors preserve their terminal stream identities`.`Read construction and stream accessors retain the selected stream` {
+extension `Terminal.Stream.Read Tests`.`Read accessors preserve their terminal stream identities`.`Read construction and stream accessors retain the selected stream` {
     @Test
     func `Init stores stream`() {
         let read = Terminal.Stream.Read(stream: .stdin)
@@ -35,7 +37,7 @@ extension Terminal.Stream.Read.`Read accessors preserve their terminal stream id
     }
 }
 
-extension Terminal.Stream.Read.`Read accessors preserve their terminal stream identities`.`Different streams produce distinct read accessors` {
+extension `Terminal.Stream.Read Tests`.`Read accessors preserve their terminal stream identities`.`Different streams produce distinct read accessors` {
     @Test
     func `Each stream produces distinct Read accessor`() {
         let stdinRead = Terminal.Stream.stdin.read
