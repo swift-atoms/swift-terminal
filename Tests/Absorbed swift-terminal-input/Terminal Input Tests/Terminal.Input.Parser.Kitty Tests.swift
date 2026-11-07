@@ -2,8 +2,8 @@
     import Terminal
     import Testing
 
-    @Suite("Parser — Kitty Keyboard")
-    struct KittyKeyboardTests {
+    @Suite
+    struct `Parser — Kitty Keyboard` {
 
         @Test
         func `Ctrl+a: ESC [ 97 ; 5 u`() throws {

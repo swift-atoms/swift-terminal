@@ -2,8 +2,8 @@
     import Terminal
     import Testing
 
-    @Suite("Parser — SGR Mouse")
-    struct SGRMouseTests {
+    @Suite
+    struct `Parser — SGR Mouse` {
 
         @Test
         func `Left press at (10, 20): ESC [ < 0 ; 10 ; 20 M`() throws {

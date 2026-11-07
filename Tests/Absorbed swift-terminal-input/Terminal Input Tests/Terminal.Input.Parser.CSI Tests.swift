@@ -2,8 +2,8 @@
     import Terminal
     import Testing
 
-    @Suite("Parser — CSI Arrow Keys")
-    struct CSIArrowTests {
+    @Suite
+    struct `Parser — CSI Arrow Keys` {
 
         @Test
         func `Arrow up: ESC [ A`() throws {
@@ -30,8 +30,8 @@
         }
     }
 
-    @Suite("Parser — CSI Modified Keys")
-    struct CSIModifiedKeyTests {
+    @Suite
+    struct `Parser — CSI Modified Keys` {
 
         @Test
         func `Ctrl+Up: ESC [ 1 ; 5 A`() throws {
@@ -58,8 +58,8 @@
         }
     }
 
-    @Suite("Parser — CSI Navigation Keys")
-    struct CSINavigationTests {
+    @Suite
+    struct `Parser — CSI Navigation Keys` {
 
         @Test
         func `Home: ESC [ H`() throws {
@@ -80,8 +80,8 @@
         }
     }
 
-    @Suite("Parser — CSI Tilde Keys")
-    struct CSITildeTests {
+    @Suite
+    struct `Parser — CSI Tilde Keys` {
 
         @Test
         func `Insert: ESC [ 2 ~`() throws {
@@ -120,8 +120,8 @@
         }
     }
 
-    @Suite("Parser — CSI Function Keys")
-    struct CSIFunctionKeyTests {
+    @Suite
+    struct `Parser — CSI Function Keys` {
 
         @Test
         func `F5: ESC [ 15 ~`() throws {
@@ -154,8 +154,8 @@
         }
     }
 
-    @Suite("Parser — SS3 Function Keys")
-    struct SS3Tests {
+    @Suite
+    struct `Parser — SS3 Function Keys` {
 
         @Test
         func `F1: ESC O P`() throws {
@@ -194,8 +194,8 @@
         }
     }
 
-    @Suite("Parser — Bracketed Paste")
-    struct BracketedPasteTests {
+    @Suite
+    struct `Parser — Bracketed Paste` {
 
         @Test
         func `Paste start: ESC [ 200 ~`() throws {
@@ -204,8 +204,8 @@
         }
     }
 
-    @Suite("Parser — Incomplete Sequences")
-    struct IncompleteCSITests {
+    @Suite
+    struct `Parser — Incomplete Sequences` {
 
         @Test
         func `Incomplete CSI restores position: ESC [`() {

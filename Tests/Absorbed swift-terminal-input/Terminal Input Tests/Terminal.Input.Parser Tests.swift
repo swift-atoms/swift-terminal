@@ -13,8 +13,8 @@
         return try Parser.parse(&buffer)
     }
 
-    @Suite("Parser — Single Bytes")
-    struct SingleByteTests {
+    @Suite
+    struct `Parser — Single Bytes` {
 
         @Test
         func `Printable ASCII characters`() throws {
@@ -48,8 +48,8 @@
         }
     }
 
-    @Suite("Parser — Control Characters")
-    struct ControlCharacterTests {
+    @Suite
+    struct `Parser — Control Characters` {
 
         @Test
         func `Enter (CR)`() throws {
@@ -100,8 +100,8 @@
         }
     }
 
-    @Suite("Parser — Escape Sequences")
-    struct EscapeTests {
+    @Suite
+    struct `Parser — Escape Sequences` {
 
         @Test
         func `Bare ESC throws incompleteSequence`() {
@@ -133,8 +133,8 @@
         }
     }
 
-    @Suite("Parser — UTF-8")
-    struct UTF8Tests {
+    @Suite
+    struct `Parser — UTF-8` {
 
         @Test
         func `2-byte UTF-8 (é)`() throws {
@@ -184,8 +184,8 @@
         }
     }
 
-    @Suite("Parser — Sequential Events")
-    struct SequentialTests {
+    @Suite
+    struct `Parser — Sequential Events` {
 
         @Test
         func `Parse multiple events from one buffer`() throws {
