@@ -3,59 +3,63 @@
     import Terminal
     import Testing
 
-    @Suite
-    struct `Terminal diagnostics preserve their operation and cause` {
+enum `Terminal.Error Tests` {}
 
-        @Test
-        func `A terminal diagnostic preserves its typed kernel cause`() {
-            let cause = Error(code: .posix(25))
-            let failure = Terminal.Error(
-                operation: .querySize,
-                underlying: .kernel(cause)
-            )
+extension `Terminal.Error Tests` {
+        @Suite
+        struct `Terminal diagnostics preserve their operation and cause` {
 
-            #expect(failure.operation == .querySize)
-            guard case .kernel(let storedCause) = failure.underlying else {
-                Issue.record("Expected a kernel error")
-                return
+            @Test
+            func `A terminal diagnostic preserves its typed kernel cause`() {
+                let cause = Error(code: .posix(25))
+                let failure = Terminal.Error(
+                    operation: .querySize,
+                    underlying: .kernel(cause)
+                )
+
+                #expect(failure.operation == .querySize)
+                guard case .kernel(let storedCause) = failure.underlying else {
+                    Issue.record("Expected a kernel error")
+                    return
+                }
+                #expect(storedCause == cause)
+                #expect(failure.description == "Terminal.querySize: posix(25)")
             }
-            #expect(storedCause == cause)
-            #expect(failure.description == "Terminal.querySize: posix(25)")
-        }
 
-        @Test
-        func `A terminal diagnostic preserves its typed platform cause`() {
-            let cause = Error(code: .win32(6))
-            let failure = Terminal.Error(
-                operation: .enableVT,
-                underlying: .platform(cause)
-            )
+            @Test
+            func `A terminal diagnostic preserves its typed platform cause`() {
+                let cause = Error(code: .win32(6))
+                let failure = Terminal.Error(
+                    operation: .enableVT,
+                    underlying: .platform(cause)
+                )
 
-            #expect(failure.operation == .enableVT)
-            guard case .platform(let storedCause) = failure.underlying else {
-                Issue.record("Expected a platform error")
-                return
+                #expect(failure.operation == .enableVT)
+                guard case .platform(let storedCause) = failure.underlying else {
+                    Issue.record("Expected a platform error")
+                    return
+                }
+                #expect(storedCause == cause)
+                #expect(failure.description == "Terminal.enableVT: win32(6)")
             }
-            #expect(storedCause == cause)
-            #expect(failure.description == "Terminal.enableVT: win32(6)")
-        }
 
-        @Test(arguments: [
-            (Terminal.Error.Operation.querySize, "Terminal.querySize: not supported on this platform"),
-            (Terminal.Error.Operation.enterRaw, "Terminal.enterRaw: not supported on this platform"),
-            (Terminal.Error.Operation.exitRaw, "Terminal.exitRaw: not supported on this platform"),
-            (Terminal.Error.Operation.enableVT, "Terminal.enableVT: not supported on this platform"),
-        ])
-        func `Unsupported diagnostics describe each operation`(
-            operation: Terminal.Error.Operation,
-            expected: String
-        ) {
-            let failure = Terminal.Error(operation: operation, underlying: .unsupported)
-            #expect(failure.description == expected)
+            @Test(arguments: [
+                (Terminal.Error.Operation.querySize, "Terminal.querySize: not supported on this platform"),
+                (Terminal.Error.Operation.enterRaw, "Terminal.enterRaw: not supported on this platform"),
+                (Terminal.Error.Operation.exitRaw, "Terminal.exitRaw: not supported on this platform"),
+                (Terminal.Error.Operation.enableVT, "Terminal.enableVT: not supported on this platform"),
+            ])
+            func `Unsupported diagnostics describe each operation`(
+                operation: Terminal.Error.Operation,
+                expected: String
+            ) {
+                let failure = Terminal.Error(operation: operation, underlying: .unsupported)
+                #expect(failure.description == expected)
+            }
         }
-    }
+}
 
-    extension `Terminal diagnostics preserve their operation and cause` {
+    extension `Terminal.Error Tests`.`Terminal diagnostics preserve their operation and cause` {
         @Test(
             arguments: [
                 Error::Error.Code.posix(.min),

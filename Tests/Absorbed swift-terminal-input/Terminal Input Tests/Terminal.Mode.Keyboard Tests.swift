@@ -5,9 +5,13 @@
     extension Terminal.Mode.Keyboard {
         @Suite
         struct `Keyboard mode sequences encode Kitty enable and disable operations` {
-            @Suite struct `Keyboard mode enable pushes flags one and disable pops the mode` {}
-            @Suite struct `Keyboard mode sequences retain distinct CSI forms and the u suffix` {}
         }
+    }
+
+    extension Terminal.Mode.Keyboard.`Keyboard mode sequences encode Kitty enable and disable operations` {
+        @Suite struct `Keyboard mode enable pushes flags one and disable pops the mode` {}
+
+        @Suite struct `Keyboard mode sequences retain distinct CSI forms and the u suffix` {}
     }
 
     extension Terminal.Mode.Keyboard.`Keyboard mode sequences encode Kitty enable and disable operations`.`Keyboard mode enable pushes flags one and disable pops the mode` {

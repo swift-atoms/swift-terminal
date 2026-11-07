@@ -5,9 +5,13 @@
     extension Terminal.Mode.Mouse {
         @Suite
         struct `Mouse mode sequences encode distinct DEC private modes` {
-            @Suite struct `Mouse mode enable and disable sequences retain their assigned mode numbers` {}
-            @Suite struct `Mouse modes preserve distinct numbers and common control sequence structure` {}
         }
+    }
+
+    extension Terminal.Mode.Mouse.`Mouse mode sequences encode distinct DEC private modes` {
+        @Suite struct `Mouse mode enable and disable sequences retain their assigned mode numbers` {}
+
+        @Suite struct `Mouse modes preserve distinct numbers and common control sequence structure` {}
     }
 
     extension Terminal.Mode.Mouse.`Mouse mode sequences encode distinct DEC private modes`.`Mouse mode enable and disable sequences retain their assigned mode numbers` {

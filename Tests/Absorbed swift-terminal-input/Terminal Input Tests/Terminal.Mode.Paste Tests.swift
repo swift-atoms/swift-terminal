@@ -5,9 +5,13 @@
     extension Terminal.Mode.Paste {
         @Suite
         struct `Paste mode sequences enable and disable bracketed paste` {
-            @Suite struct `Bracketed paste enable and disable use private mode 2004` {}
-            @Suite struct `Paste mode sequences share the CSI prefix and differ in their final byte` {}
         }
+    }
+
+    extension Terminal.Mode.Paste.`Paste mode sequences enable and disable bracketed paste` {
+        @Suite struct `Bracketed paste enable and disable use private mode 2004` {}
+
+        @Suite struct `Paste mode sequences share the CSI prefix and differ in their final byte` {}
     }
 
     extension Terminal.Mode.Paste.`Paste mode sequences enable and disable bracketed paste`.`Bracketed paste enable and disable use private mode 2004` {

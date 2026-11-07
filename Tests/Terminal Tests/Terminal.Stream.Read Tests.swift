@@ -6,9 +6,13 @@ enum `Terminal.Stream.Read Tests` {}
 extension `Terminal.Stream.Read Tests` {
     @Suite
     struct `Read accessors preserve their terminal stream identities` {
-        @Suite struct `Read construction and stream accessors retain the selected stream` {}
-        @Suite struct `Different streams produce distinct read accessors` {}
     }
+}
+
+extension `Terminal.Stream.Read Tests`.`Read accessors preserve their terminal stream identities` {
+    @Suite struct `Read construction and stream accessors retain the selected stream` {}
+
+    @Suite struct `Different streams produce distinct read accessors` {}
 }
 
 extension `Terminal.Stream.Read Tests`.`Read accessors preserve their terminal stream identities`.`Read construction and stream accessors retain the selected stream` {

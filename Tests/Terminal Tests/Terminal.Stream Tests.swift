@@ -2,13 +2,22 @@ import Testing
 
 @testable import Terminal
 
-@Suite struct `Terminal streams preserve descriptor values and enumeration` {
+enum `Terminal.Stream Tests` {}
+
+extension `Terminal.Stream Tests` {
+    @Suite struct `Terminal streams preserve descriptor values and enumeration` {
+    }
+}
+
+extension `Terminal.Stream Tests`.`Terminal streams preserve descriptor values and enumeration` {
     @Suite struct `Standard terminal streams retain their descriptor values and complete enumeration` {}
+
     @Suite struct `No terminal stream boundary cases are defined` {}
+
     @Suite struct `No terminal stream integration cases are defined` {}
 }
 
-extension `Terminal streams preserve descriptor values and enumeration`.`Standard terminal streams retain their descriptor values and complete enumeration` {
+extension `Terminal.Stream Tests`.`Terminal streams preserve descriptor values and enumeration`.`Standard terminal streams retain their descriptor values and complete enumeration` {
     @Test
     func `Stream raw values are correct`() {
         #expect(Terminal.Stream.stdin.rawValue == 0)
@@ -26,13 +35,20 @@ extension `Terminal streams preserve descriptor values and enumeration`.`Standar
     }
 }
 
-@Suite struct `Terminal sizes preserve dimensions and compare stored values` {
+extension `Terminal.Stream Tests` {
+    @Suite struct `Terminal sizes preserve dimensions and compare stored values` {
+    }
+}
+
+extension `Terminal.Stream Tests`.`Terminal sizes preserve dimensions and compare stored values` {
     @Suite struct `Terminal size construction retains dimensions and equality distinguishes sizes` {}
+
     @Suite struct `No terminal size boundary cases are defined` {}
+
     @Suite struct `No terminal size integration cases are defined` {}
 }
 
-extension `Terminal sizes preserve dimensions and compare stored values`.`Terminal size construction retains dimensions and equality distinguishes sizes` {
+extension `Terminal.Stream Tests`.`Terminal sizes preserve dimensions and compare stored values`.`Terminal size construction retains dimensions and equality distinguishes sizes` {
     @Test
     func `Size can be created`() {
         let size = Terminal.Size(rows: 24, columns: 80)
