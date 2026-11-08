@@ -1,3 +1,3 @@
 #if Error
-    public import Error
+    import Error
 #endif
