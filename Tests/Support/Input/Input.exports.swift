@@ -1,3 +1,3 @@
 #if Input
-    public import Terminal
+    import Terminal
 #endif
