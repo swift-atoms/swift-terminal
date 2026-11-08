@@ -13,9 +13,9 @@
         return try Parser.parse(&buffer)
     }
 
-enum `Terminal.Input.Parser Tests` {}
+    enum `Terminal.Input.Parser Tests` {}
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Parser — Single Bytes` {
 
@@ -50,9 +50,9 @@ extension `Terminal.Input.Parser Tests` {
                 }
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Parser — Control Characters` {
 
@@ -104,9 +104,9 @@ extension `Terminal.Input.Parser Tests` {
                 #expect(event == .key(Key(code: .character("\\"), modifiers: .control)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Parser — Escape Sequences` {
 
@@ -139,9 +139,9 @@ extension `Terminal.Input.Parser Tests` {
                 #expect(event == .key(Key(code: .character("Z"), modifiers: .alt)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Parser — UTF-8` {
 
@@ -192,9 +192,9 @@ extension `Terminal.Input.Parser Tests` {
                 #expect(buffer == saved)
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Parser — Sequential Events` {
 
@@ -216,9 +216,9 @@ extension `Terminal.Input.Parser Tests` {
                 #expect(empty)
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser Tests` {
+    extension `Terminal.Input.Parser Tests` {
         @Suite
         struct `Byte parsing preserves the selected slice and its remaining input` {
             @Test(arguments: [
@@ -264,6 +264,6 @@ extension `Terminal.Input.Parser Tests` {
                 #expect(input.map(\.bitPattern) == payload)
             }
         }
-}
+    }
 
 #endif

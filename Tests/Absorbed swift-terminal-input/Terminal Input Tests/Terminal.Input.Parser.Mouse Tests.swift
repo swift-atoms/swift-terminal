@@ -2,9 +2,9 @@
     import Terminal
     import Testing
 
-enum `Terminal.Input.Parser.Mouse Tests` {}
+    enum `Terminal.Input.Parser.Mouse Tests` {}
 
-extension `Terminal.Input.Parser.Mouse Tests` {
+    extension `Terminal.Input.Parser.Mouse Tests` {
         @Suite
         struct `Parser — SGR Mouse` {
 
@@ -128,6 +128,6 @@ extension `Terminal.Input.Parser.Mouse Tests` {
                 #expect(event == .mouse(Mouse(kind: .press(.left), column: 1, row: 1, modifiers: .control)))
             }
         }
-}
+    }
 
 #endif

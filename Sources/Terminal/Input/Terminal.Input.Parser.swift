@@ -487,13 +487,14 @@
             let code = mapCodepointToKeyCode(codepoint)
 
             let text: Swift::String?
-            text = if let scalar = Unicode.Scalar(codepoint),
-                codepoint >= 0x20 && codepoint != 0x7F && codepoint < 0xE000
-            {
-                Swift::String(scalar)
-            } else {
-                nil
-            }
+            text =
+                if let scalar = Unicode.Scalar(codepoint),
+                    codepoint >= 0x20 && codepoint != 0x7F && codepoint < 0xE000
+                {
+                    Swift::String(scalar)
+                } else {
+                    nil
+                }
 
             return .key(Terminal.Input.Key(code: code, modifiers: modifiers, text: text, kind: kind))
         }

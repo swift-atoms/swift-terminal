@@ -2,9 +2,9 @@
     import Terminal
     import Testing
 
-enum `Terminal.Input.Parser.CSI Tests` {}
+    enum `Terminal.Input.Parser.CSI Tests` {}
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — CSI Arrow Keys` {
 
@@ -32,9 +32,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .left)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — CSI Modified Keys` {
 
@@ -62,9 +62,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .left, modifiers: [.shift, .control])))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — CSI Navigation Keys` {
 
@@ -86,9 +86,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .backtab)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — CSI Tilde Keys` {
 
@@ -128,9 +128,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .end)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — CSI Function Keys` {
 
@@ -164,9 +164,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .function(5), modifiers: .control)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — SS3 Function Keys` {
 
@@ -206,9 +206,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .key(Key(code: .end)))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — Bracketed Paste` {
 
@@ -218,9 +218,9 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(event == .paste(""))
             }
         }
-}
+    }
 
-extension `Terminal.Input.Parser.CSI Tests` {
+    extension `Terminal.Input.Parser.CSI Tests` {
         @Suite
         struct `Parser — Incomplete Sequences` {
 
@@ -244,6 +244,6 @@ extension `Terminal.Input.Parser.CSI Tests` {
                 #expect(buffer == saved)
             }
         }
-}
+    }
 
 #endif

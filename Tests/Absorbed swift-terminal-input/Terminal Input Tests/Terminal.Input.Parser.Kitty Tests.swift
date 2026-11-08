@@ -2,9 +2,9 @@
     import Terminal
     import Testing
 
-enum `Terminal.Input.Parser.Kitty Tests` {}
+    enum `Terminal.Input.Parser.Kitty Tests` {}
 
-extension `Terminal.Input.Parser.Kitty Tests` {
+    extension `Terminal.Input.Parser.Kitty Tests` {
         @Suite
         struct `Parser — Kitty Keyboard` {
 
@@ -126,6 +126,6 @@ extension `Terminal.Input.Parser.Kitty Tests` {
                 )
             }
         }
-}
+    }
 
 #endif

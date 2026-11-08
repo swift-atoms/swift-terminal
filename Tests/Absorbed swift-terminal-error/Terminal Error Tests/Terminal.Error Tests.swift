@@ -3,9 +3,9 @@
     import Terminal
     import Testing
 
-enum `Terminal.Error Tests` {}
+    enum `Terminal.Error Tests` {}
 
-extension `Terminal.Error Tests` {
+    extension `Terminal.Error Tests` {
         @Suite
         struct `Terminal diagnostics preserve their operation and cause` {
 
@@ -57,7 +57,7 @@ extension `Terminal.Error Tests` {
                 #expect(failure.description == expected)
             }
         }
-}
+    }
 
     extension `Terminal.Error Tests`.`Terminal diagnostics preserve their operation and cause` {
         @Test(
