@@ -2,7 +2,7 @@
     import Terminal
     import Testing
 
-    @Suite("Terminal.Input.Key")
+    @Suite
     struct KeyTests {
 
         @Test
@@ -35,7 +35,7 @@
         }
     }
 
-    @Suite("Terminal.Input.Key.Modifiers")
+    @Suite
     struct ModifiersTests {
 
         @Test
@@ -83,7 +83,7 @@
         }
     }
 
-    @Suite("Terminal.Input.Mouse")
+    @Suite
     struct MouseTypeTests {
 
         @Test
@@ -114,7 +114,7 @@
         }
     }
 
-    @Suite("Terminal.Input.Event")
+    @Suite
     struct EventTypeTests {
 
         @Test
