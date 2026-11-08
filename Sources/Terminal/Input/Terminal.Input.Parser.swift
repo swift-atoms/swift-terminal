@@ -138,7 +138,6 @@
 
 #if Input
     import ASCII
-    import Byte
     import Cursor
 
     extension Terminal.Input.Parser {
@@ -408,7 +407,6 @@
 
 #if Input
     import ASCII
-    import Byte
     import Cursor
 
     extension Terminal.Input.Parser {
@@ -462,7 +460,6 @@
 
 #if Input
     import ASCII
-    import Byte
     import Cursor
 
     extension Terminal.Input.Parser {
@@ -522,7 +519,6 @@
 
 #if Input
     import ASCII
-    import Byte
     import Cursor
 
     extension Terminal.Input.Parser {
@@ -597,7 +593,6 @@
 
 #if Input
     import ASCII
-    import Byte
     import Cursor
 
     extension Terminal.Input.Parser {
