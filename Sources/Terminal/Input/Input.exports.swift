@@ -1,5 +1,5 @@
 #if Input
-    @_exported public import ASCII
-    @_exported public import Byte
-    @_exported public import Cursor
+    public import ASCII
+    public import Byte
+    public import Cursor
 #endif

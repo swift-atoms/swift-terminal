@@ -1,3 +1,3 @@
 #if Input
-    @_exported public import Terminal
+    public import Terminal
 #endif
