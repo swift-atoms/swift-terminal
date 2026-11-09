@@ -235,6 +235,9 @@
                 return .key(Terminal.Input.Key(code: .backtab))
 
             case .tilde:
+                if paramCount == 1 && p0 == 200 {
+                    return try parsePaste(&input)
+                }
                 return try parseTildeKey(
                     keyNumber: p0,
                     modifierParam: paramCount >= 2 ? p1 : 0,
@@ -362,17 +365,52 @@
             case 23: code = .function(11)
             case 24: code = .function(12)
 
-            case 200:
-                return .paste("")
-
-            case 201:
-                throw .unrecognizedSequence
-
             default:
                 throw .unrecognizedSequence
             }
 
             return .key(Terminal.Input.Key(code: code, modifiers: modifiers))
+        }
+    }
+
+    extension Terminal.Input.Parser {
+
+        /// Collects bracketed-paste text after `ESC [ 200 ~` up to and
+        /// consuming the end marker `ESC [ 201 ~`.
+        ///
+        /// Throws `incompleteSequence` while the end marker has not arrived,
+        /// so the caller keeps the bytes and retries with more input.
+        static func parsePaste(
+            _ input: inout ArraySlice<Byte>
+        ) throws(Self.Error) -> Terminal.Input.Event {
+            let end: [UInt8] = [
+                ASCII.Code.esc.underlying,
+                ASCII.Code.leftBracket.underlying,
+                ASCII.Code.`2`.underlying,
+                ASCII.Code.`0`.underlying,
+                ASCII.Code.`1`.underlying,
+                ASCII.Code.tilde.underlying,
+            ]
+
+            var index = input.startIndex
+            while input.endIndex - index >= end.count {
+                var matches = true
+                for offset in 0..<end.count where input[index + offset].bitPattern != end[offset] {
+                    matches = false
+                    break
+                }
+                if matches {
+                    let text = Swift::String(
+                        decoding: input[input.startIndex..<index].lazy.map(\.bitPattern),
+                        as: UTF8.self
+                    )
+                    input = input[(index + end.count)...]
+                    return .paste(text)
+                }
+                index += 1
+            }
+
+            throw .incompleteSequence
         }
     }
 

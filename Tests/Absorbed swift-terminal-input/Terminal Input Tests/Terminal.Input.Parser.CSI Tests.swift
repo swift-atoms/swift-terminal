@@ -213,9 +213,40 @@
         struct `Parser — Bracketed Paste` {
 
             @Test
-            func `Paste start: ESC [ 200 ~`() throws {
-                let event = try parse([0x1B, 0x5B, 0x32, 0x30, 0x30, 0x7E])
+            func `Paste delivers the text between ESC [ 200 ~ and ESC [ 201 ~`() throws {
+                var buffer = ArraySlice(
+                    ([0x1B, 0x5B, 0x32, 0x30, 0x30, 0x7E] + Array("hé\u{1B}[A".utf8)
+                        + [0x1B, 0x5B, 0x32, 0x30, 0x31, 0x7E, 0x61]).map(Byte.init(bitPattern:))
+                )
+                let event = try Parser.parse(&buffer)
+                #expect(event == .paste("hé\u{1B}[A"))
+                #expect(buffer.map(\.bitPattern) == [0x61])
+            }
+
+            @Test
+            func `Empty paste: ESC [ 200 ~ ESC [ 201 ~`() throws {
+                let event = try parse([0x1B, 0x5B, 0x32, 0x30, 0x30, 0x7E, 0x1B, 0x5B, 0x32, 0x30, 0x31, 0x7E])
                 #expect(event == .paste(""))
+            }
+
+            @Test
+            func `Paste without end marker is incomplete and restores position`() {
+                var buffer = ArraySlice(
+                    ([0x1B, 0x5B, 0x32, 0x30, 0x30, 0x7E, 0x68, 0x69, 0x1B, 0x5B, 0x32, 0x30])
+                        .map(Byte.init(bitPattern:))
+                )
+                let saved = buffer
+                #expect(throws: ParseError.incompleteSequence) {
+                    try Parser.parse(&buffer)
+                }
+                #expect(buffer == saved)
+            }
+
+            @Test
+            func `Lone paste end marker is unrecognized: ESC [ 201 ~`() {
+                #expect(throws: ParseError.unrecognizedSequence) {
+                    try parse([0x1B, 0x5B, 0x32, 0x30, 0x31, 0x7E])
+                }
             }
         }
     }
