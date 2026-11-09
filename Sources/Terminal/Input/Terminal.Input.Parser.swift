@@ -394,12 +394,8 @@
 
             var index = input.startIndex
             while input.endIndex - index >= end.count {
-                var matches = true
-                for offset in 0..<end.count where input[index + offset].bitPattern != end[offset] {
-                    matches = false
-                    break
-                }
-                if matches {
+                let window = input[index..<(index + end.count)]
+                if window.lazy.map(\.bitPattern).elementsEqual(end) {
                     let text = Swift::String(
                         decoding: input[input.startIndex..<index].lazy.map(\.bitPattern),
                         as: UTF8.self
