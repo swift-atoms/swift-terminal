@@ -395,9 +395,9 @@
             var index = input.startIndex
             while input.endIndex - index >= end.count {
                 let window = input[index..<(index + end.count)]
-                if window.lazy.map(\.bitPattern).elementsEqual(end) {
+                if window.lazy.map({ $0.bitPattern }).elementsEqual(end) {
                     let text = Swift::String(
-                        decoding: input[input.startIndex..<index].lazy.map(\.bitPattern),
+                        decoding: input[input.startIndex..<index].lazy.map({ $0.bitPattern }),
                         as: UTF8.self
                     )
                     input = input[(index + end.count)...]
